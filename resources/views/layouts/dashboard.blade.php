@@ -50,10 +50,10 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">Catering</a>
+            <a href="#">SMK Nusa Dua</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">Ct</a>
+            <a href="#">SKND</a>
           </div>
           <ul class="sidebar-menu">
             <li>
@@ -62,46 +62,32 @@
               </a>
             </li>
 
-            <li class="menu-header">Master</li>
+            <li class="menu-header">Siswa</li>
             <li>
               <a class="nav-link" href="#">
-                <i class="fas fa-th-large"></i> <span>Sizes</span>
+                <i class="fas fa-hotel"></i> <span>Akomodasi Perhotelan</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-desktop"></i> <span>Multimedia</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-utensils"></i> <span>Tata Boga</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-wallet"></i> <span>Tata Niaga</span>
               </a>
             </li>
 
-            <li class="menu-header">Menu Management</li>
+            <li class="menu-header">Data</li>
             <li>
               <a class="nav-link" href="#">
-                <i class="fas fa-ice-cream"></i> <span>Desserts</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-utensils"></i> <span>Main Courses</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-clipboard-list"></i> <span>Daily Menus</span>
-              </a>
-            </li>
-
-            <li class="menu-header">Order</li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-clipboard-check"></i> <span>Confirmation</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-receipt"></i> <span>View Orders</span>
-              </a>
-            </li>
-
-            <li class="menu-header">Customers</li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-users"></i> <span>Customers</span>
+                <i class="fas fa-user-plus"></i> <span>Tambah Data Siswa</span>
               </a>
             </li>
           </ul>

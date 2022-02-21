@@ -28,6 +28,12 @@ class RoleSeeder extends Seeder
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ],
+            [
+                'id'   => 3,
+                'name' => 'student',
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ],
         ]);
     }
 }

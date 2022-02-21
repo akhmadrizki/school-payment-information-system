@@ -26,6 +26,15 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ],
+            [
+                'username' => 'admin',
+                'name' => 'admin',
+                'email' => 'admin@skand.com',
+                'role_id' => 2,
+                'password' => Hash::make('admin123#'),
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ],
         ]);
     }
 }

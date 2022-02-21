@@ -22,9 +22,7 @@ Route::get('/', function () {
 Route::get('/login-admin', [LoginController::class, 'index'])->name('admin');
 
 Route::prefix('/')->group(function () {
-    Route::get('/login', function () {
-        return redirect()->to('/login-admin');
-    })->name('login');
+    Route::redirect('/login', '/login-admin');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
