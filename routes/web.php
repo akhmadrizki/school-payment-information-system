@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PerhotelanController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,15 @@ Route::prefix('/')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::prefix('/dashboard')->group(function () {
+        // Akomodasi Perhotelan Routes
+        Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');
+        Route::get('/akomodasi-perhotelan/kelas/X', [PerhotelanController::class, 'kelasX'])->name('admin.xap');
+
+        Route::get('/multimedia', [AdminController::class, 'multimedia'])->name('admin.multimedia');
+        Route::get('/tata-boga', [AdminController::class, 'tataBoga'])->name('admin.tata-boga');
+        Route::get('/tata-niaga', [AdminController::class, 'tataNiaga'])->name('admin.tata-niaga');
+    });
 });
 
 // Auth::routes();

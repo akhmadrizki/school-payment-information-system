@@ -34,6 +34,7 @@
         <ul class="navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="avatar" src="{{ asset('stisla/img/avatar-1.png')}}" class="rounded-circle mr-1">
               <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -56,30 +57,32 @@
             <a href="#">SKND</a>
           </div>
           <ul class="sidebar-menu">
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.dashboard' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
               </a>
             </li>
 
+            <!-- For Roles Admin and Master -->
+            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
             <li class="menu-header">Siswa</li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.perhotelan' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.perhotelan') }}">
                 <i class="fas fa-hotel"></i> <span>Akomodasi Perhotelan</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.multimedia' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.multimedia') }}">
                 <i class="fas fa-desktop"></i> <span>Multimedia</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.tata-boga' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.tata-boga') }}">
                 <i class="fas fa-utensils"></i> <span>Tata Boga</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.tata-niaga' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.tata-niaga') }}">
                 <i class="fas fa-wallet"></i> <span>Tata Niaga</span>
               </a>
             </li>
@@ -90,6 +93,19 @@
                 <i class="fas fa-user-plus"></i> <span>Tambah Data Siswa</span>
               </a>
             </li>
+
+            <!-- For Role Student -->
+            @elseif(auth()->user()->role_id == 3)
+            <li class="menu-header">Data</li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-user-plus"></i> <span>Aku Siswa</span>
+              </a>
+            </li>
+
+            @endif
+            <!-- End Conditional -->
+
           </ul>
         </aside>
       </div>

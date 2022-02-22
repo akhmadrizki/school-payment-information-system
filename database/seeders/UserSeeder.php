@@ -35,6 +35,15 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ],
+            [
+                'username' => 'yoga',
+                'name' => 'Akhmad Rizki Prayoga',
+                'email' => 'akhmadrizki24@gmail.com',
+                'role_id' => 3,
+                'password' => Hash::make('yoga123#'),
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ],
         ]);
     }
 }
