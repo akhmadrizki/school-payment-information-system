@@ -11,19 +11,4 @@ class AdminController extends Controller
     {
         return view('pages.dashboard.index');
     }
-
-    public function multimedia()
-    {
-        return view('pages.dashboard.study-programs.multimedia.index');
-    }
-
-    public function tataBoga()
-    {
-        return view('pages.dashboard.study-programs.tata-boga.index');
-    }
-
-    public function tataNiaga()
-    {
-        return view('pages.dashboard.study-programs.tata-niaga.index');
-    }
 }

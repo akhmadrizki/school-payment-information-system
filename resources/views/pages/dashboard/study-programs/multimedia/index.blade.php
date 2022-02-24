@@ -34,7 +34,7 @@
                   </div>
                 </div>
                 <div class="pricing-cta">
-                  <a href="#">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                  <a href="{{ route('admin.xmm') }}">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@
                   </div>
                 </div>
                 <div class="pricing-cta">
-                  <a href="#">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                  <a href="{{ route('admin.ximm') }}">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@
                   </div>
                 </div>
                 <div class="pricing-cta">
-                  <a href="#">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                  <a href="{{ route('admin.xiimm') }}">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>

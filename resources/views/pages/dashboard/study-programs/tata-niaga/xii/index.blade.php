@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'X Akomodasi Perhotelan')
+@section('title', 'XII Tata Niaga')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('stisla/modules/datatables/datatables.min.css') }}">
@@ -11,7 +11,7 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>Kelas X Akomodasi Perhotelan</h1>
+  <h1>Kelas XII Tata Niaga</h1>
 
   <div class="section-header-breadcrumb">
     <a href="{{ url()->previous() }}" class="btn btn-sm btn-icon icon-left btn-primary">

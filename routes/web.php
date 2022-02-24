@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\MultimediaController;
 use App\Http\Controllers\Admin\PerhotelanController;
+use App\Http\Controllers\Admin\TataBogaController;
+use App\Http\Controllers\Admin\TataNiagaController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,10 +37,26 @@ Route::middleware(['auth'])->group(function () {
         // Akomodasi Perhotelan Routes
         Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');
         Route::get('/akomodasi-perhotelan/kelas/X', [PerhotelanController::class, 'kelasX'])->name('admin.xap');
+        Route::get('/akomodasi-perhotelan/kelas/XI', [PerhotelanController::class, 'kelasXI'])->name('admin.xiap');
+        Route::get('/akomodasi-perhotelan/kelas/XII', [PerhotelanController::class, 'kelasXII'])->name('admin.xiiap');
 
-        Route::get('/multimedia', [AdminController::class, 'multimedia'])->name('admin.multimedia');
-        Route::get('/tata-boga', [AdminController::class, 'tataBoga'])->name('admin.tata-boga');
-        Route::get('/tata-niaga', [AdminController::class, 'tataNiaga'])->name('admin.tata-niaga');
+        // Multimedia Routes
+        Route::get('/multimedia', [MultimediaController::class, 'index'])->name('admin.multimedia');
+        Route::get('/multimedia/kelas/X', [MultimediaController::class, 'kelasX'])->name('admin.xmm');
+        Route::get('/multimedia/kelas/XI', [MultimediaController::class, 'kelasXI'])->name('admin.ximm');
+        Route::get('/multimedia/kelas/XII', [MultimediaController::class, 'kelasXII'])->name('admin.xiimm');
+
+        // Tata Boga Routes
+        Route::get('/tata-boga', [TataBogaController::class, 'index'])->name('admin.tata-boga');
+        Route::get('/tata-boga/kelas/X', [TataBogaController::class, 'kelasX'])->name('admin.xtb');
+        Route::get('/tata-boga/kelas/XI', [TataBogaController::class, 'kelasXI'])->name('admin.xitb');
+        Route::get('/tata-boga/kelas/XII', [TataBogaController::class, 'kelasXII'])->name('admin.xiitb');
+
+
+        Route::get('/tata-niaga', [TataNiagaController::class, 'index'])->name('admin.tata-niaga');
+        Route::get('/tata-niaga/kelas/X', [TataNiagaController::class, 'kelasX'])->name('admin.xtn');
+        Route::get('/tata-niaga/kelas/XI', [TataNiagaController::class, 'kelasXI'])->name('admin.xitn');
+        Route::get('/tata-niaga/kelas/XII', [TataNiagaController::class, 'kelasXII'])->name('admin.xiitn');
     });
 });
 
