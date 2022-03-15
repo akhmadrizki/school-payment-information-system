@@ -58,11 +58,8 @@
                   <td>
                     @foreach ($student->user->invoice as $status)
 
-                    @if($status->status == 'belum lunas')
-                    <span class="badge badge-danger">{{ $status->status }}</span>
-                    @else
-                    <span class="badge badge-success">{{ $status->status }}</span>
-                    @endif
+                    <span class="badge badge-{{ $status->status == 'belum lunas' ? 'danger' : 'success' }}">{{
+                      $status->status }}</span>
 
                     @endforeach
                   </td>
@@ -73,16 +70,10 @@
                   </td>
                   <td>
                     @foreach ($student->user->invoice as $status)
-                    @if($status->status == 'belum lunas')
-                    <a href="#" class="btn btn-sm btn-icon icon-left btn-warning">
+                    <a href="#"
+                      class="btn btn-sm btn-icon icon-left btn-warning {{ $status->status == 'belum lunas' ? 'none' :  'disabled'}}">
                       <i class="fas fa-paper-plane"></i> Kirim pengingat
                     </a>
-
-                    @else
-                    <a href="#" class="btn btn-sm btn-icon icon-left btn-warning disabled">
-                      <i class="fas fa-paper-plane"></i> Kirim pengingat
-                    </a>
-                    @endif
                     @endforeach
                   </td>
                 </tr>

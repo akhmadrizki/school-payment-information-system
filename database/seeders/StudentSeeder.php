@@ -21,6 +21,7 @@ class StudentSeeder extends Seeder
                 'nis' => '6381',
                 'whatsapp' => '6281999015508',
                 'whatsapp_parent' => '6281936060096',
+                'is_active' => true,
                 'user_id' => 3,
                 'study_program_id' => 2,
                 'grade_id' => 3,

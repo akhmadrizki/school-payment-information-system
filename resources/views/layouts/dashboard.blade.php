@@ -38,6 +38,9 @@
               <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
+              <a href="#" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Edit Profile
+              </a>
               <a href="{{ route('logout') }}" id="logout" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
@@ -65,6 +68,18 @@
 
             <!-- For Roles Admin and Master -->
             @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+            <li class="{{ Request::route()->getName() == 'bill.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('bill.index') }}">
+                <i class="fas fa-bullhorn"></i> <span>Buat Tagihan</span>
+              </a>
+            </li>
+
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-inbox"></i> <span>Tunggakan</span>
+              </a>
+            </li>
+
             <li class="menu-header">Siswa</li>
             <li class="{{ Request::route()->getName() == 'admin.perhotelan' ? 'active' : null }}">
               <a class="nav-link" href="{{ route('admin.perhotelan') }}">
@@ -88,8 +103,13 @@
             </li>
 
             <li class="menu-header">Data</li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'siswa.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('siswa.index') }}">
+                <i class="fas fa-user"></i> <span>List Siswa</span>
+              </a>
+            </li>
+            <li class="{{ Request::route()->getName() == 'siswa.create' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('siswa.create') }}">
                 <i class="fas fa-user-plus"></i> <span>Tambah Data Siswa</span>
               </a>
             </li>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BillController;
+use App\Http\Controllers\Admin\DataSiswaController;
 use App\Http\Controllers\Admin\MultimediaController;
 use App\Http\Controllers\Admin\PerhotelanController;
 use App\Http\Controllers\Admin\TataBogaController;
@@ -34,6 +36,9 @@ Route::prefix('/')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::prefix('/dashboard')->group(function () {
+        // Bill Routes
+        Route::resource('/bill', BillController::class);
+
         // Akomodasi Perhotelan Routes
         Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');
         Route::get('/akomodasi-perhotelan/kelas/X', [PerhotelanController::class, 'kelasX'])->name('admin.xap');
@@ -52,11 +57,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/tata-boga/kelas/XI', [TataBogaController::class, 'kelasXI'])->name('admin.xitb');
         Route::get('/tata-boga/kelas/XII', [TataBogaController::class, 'kelasXII'])->name('admin.xiitb');
 
-
+        // Tata Niaga Routes
         Route::get('/tata-niaga', [TataNiagaController::class, 'index'])->name('admin.tata-niaga');
         Route::get('/tata-niaga/kelas/X', [TataNiagaController::class, 'kelasX'])->name('admin.xtn');
         Route::get('/tata-niaga/kelas/XI', [TataNiagaController::class, 'kelasXI'])->name('admin.xitn');
         Route::get('/tata-niaga/kelas/XII', [TataNiagaController::class, 'kelasXII'])->name('admin.xiitn');
+
+        // Data Siswa Routes
+        Route::resource('/siswa', DataSiswaController::class);
     });
 });
 

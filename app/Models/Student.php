@@ -14,6 +14,7 @@ class Student extends Model
         'nis',
         'whatsapp',
         'whatsapp_parent',
+        'is_active',
         'user_id',
         'study_program_id',
         'grade_id',
