@@ -56,7 +56,7 @@
                   <td>{{ $bill->year }}</td>
                   <td>{{ $bill->grade->name }}</td>
                   <td>{{ $bill->description }}</td>
-                  <td>{{ $bill->total }}</td>
+                  <td>Rp.{{ number_format($bill->total, 0, ',', '.') }}</td>
                   <td>
                     <a href="{{ route('bill.edit', $bill->id) }}" class="btn btn-sm btn-icon icon-left btn-primary"><i
                         class="fas fa-edit"></i>

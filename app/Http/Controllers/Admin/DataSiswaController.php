@@ -98,7 +98,10 @@ class DataSiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::with('user', 'studyProgram', 'grade')->findOrFail($id);
+        $studyPrograms = StudyProgram::all();
+        $grades = Grade::all();
+        return view('pages.dashboard.students.edit', compact('student', 'studyPrograms', 'grades'));
     }
 
     /**
@@ -110,7 +113,22 @@ class DataSiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $fields = [
+            'nis'              => $request->nis,
+            'study_program_id' => $request->study_program,
+            'grade_id'         => $request->grade,
+        ];
+        $student->update($fields);
+
+        $user = User::findOrFail($student->user_id);
+        $user->name = $request->name;
+        $user->save();
+
+        return redirect()->route('siswa.index')->with([
+            'message' => 'Data siswa berhasil diubah',
+            'status' => 'success',
+        ]);
     }
 
     /**

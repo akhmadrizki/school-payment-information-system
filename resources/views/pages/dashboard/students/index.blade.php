@@ -36,8 +36,9 @@
                 <tr>
                   <th>NIS</th>
                   <th>Name</th>
-                  <th>Prodi</th>
+                  <th>Jurusan</th>
                   <th>Kelas</th>
+                  <th></th>
                 </tr>
               </thead>
 
@@ -48,6 +49,11 @@
                   <td>{{ $student->user->name }}</td>
                   <td>{{ $student->studyProgram->name }}</td>
                   <td>{{ $student->grade->name }}</td>
+                  <td>
+                    <a href="{{ route('siswa.edit', $student->id) }}"
+                      class="btn btn-sm btn-icon icon-left btn-primary"><i class="fas fa-edit"></i>
+                      Edit</a>
+                  </td>
                 </tr>
                 @endforeach
               </tbody>

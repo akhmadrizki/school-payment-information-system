@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Data Siswa')
+@section('title', 'Edit Data Siswa')
 
 @section('custom-css')
 
@@ -8,7 +8,7 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>Tambah Data Siswa</h1>
+  <h1>Edit Data Siswa</h1>
 </div>
 
 <div class="section-body">
@@ -16,13 +16,14 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <form action="{{ route('siswa.store') }}" method="POST">
+          <form action="{{ route('siswa.update', $student->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="nis">NIS</label>
                 <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" id="nis"
-                  value="{{ old('nis') }}" placeholder="NIS">
+                  value="{{ $student->nis }}" readonly>
                 @error('nis')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -31,7 +32,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="name">Nama</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}"
+                <input type="text" class="form-control" name="name" id="name" value="{{ $student->user->name }}"
                   placeholder="Nama">
               </div>
               <div class="form-group col-md-6">
@@ -39,7 +40,10 @@
                 <select name="study_program" id="study_program" class="form-control">
                   <option value="none" selected disabled>- Pilih Jurusan -</option>
                   @foreach ($studyPrograms as $studyProgram)
-                  <option value="{{ $studyProgram->id }}">{{ $studyProgram->name }}</option>
+                  <option value="{{ $studyProgram->id }}" @if($student->study_program_id == $studyProgram->id) selected
+                    @endif>{{
+                    $studyProgram->name }}
+                  </option>
                   @endforeach
                 </select>
               </div>
@@ -48,7 +52,8 @@
                 <select name="grade" id="grade" class="form-control">
                   <option value="none" selected disabled>- Pilih Kelas -</option>
                   @foreach ($grades as $grade)
-                  <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                  <option value="{{ $grade->id }}" @if($student->grade_id == $grade->id) selected @endif>{{ $grade->name
+                    }}</option>
                   @endforeach
                 </select>
               </div>
@@ -56,7 +61,7 @@
 
             <div class="text-right">
               <button type="submit" class="btn btn-primary mr-2">Save</button>
-              <a href="#" type="button" class="btn">Cancel</a>
+              <a href="{{ url()->previous() }}" type="button" class="btn">Cancel</a>
             </div>
           </form>
 
