@@ -22,4 +22,9 @@ class Bill extends Model
     {
         return $this->belongsTo(Grade::class, 'grade_id');
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'bill_id');
+    }
 }

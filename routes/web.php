@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\DataSiswaController;
+use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\MultimediaController;
 use App\Http\Controllers\Admin\PerhotelanController;
 use App\Http\Controllers\Admin\TataBogaController;
@@ -38,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/dashboard')->group(function () {
         // Bill Routes
         Route::resource('/bill', BillController::class);
+
+        // Route Debt
+        Route::resource('/tunggakan', DebtController::class)->only(['index', 'show']);
 
         // Akomodasi Perhotelan Routes
         Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');

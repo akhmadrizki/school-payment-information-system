@@ -13,6 +13,7 @@ class Invoice extends Model
     protected $table = 'invoices';
     protected $fillable = [
         'user_id',
+        'bill_id',
         'invoice_code',
         'status',
         'invoice_url',
@@ -21,7 +22,7 @@ class Invoice extends Model
         'total',
     ];
 
-    public const ORDERCODE = 'INV';
+    public const ORDERCODE = 'SPP';
 
     public static function generateCode()
     {
@@ -44,5 +45,10 @@ class Invoice extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function bill()
+    {
+        return $this->belongsTo(Bill::class, 'bill_id');
     }
 }

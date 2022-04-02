@@ -72,18 +72,19 @@ class BillController extends Controller
         foreach ($students as $student) {
             $invoice = new Invoice;
             $invoice->user_id = $student->user->id;
+            $invoice->bill_id = $bill->id;
             $invoice->invoice_code = Invoice::generateCode();
             $invoice->total = $bill->total;
             $invoice->save();
 
             array_push(
                 $temp,
-                $student->user->id
+                $invoice->id
             );
         }
 
         // Get invoice with previous data
-        $getInvoice = Invoice::whereIn('user_id', $temp)
+        $getInvoice = Invoice::whereIn('id', $temp)
             ->with('user')
             ->get();
 
@@ -97,7 +98,7 @@ class BillController extends Controller
                 'customer'          => [
                     'email' => $data->user->email,
                     'mobile_number' => $data->user->students->whatsapp,
-                    'name' => $data->user->name,
+                    'given_names' => $data->user->name,
                 ],
                 'customer_notification_preference' => [
                     'invoice_created' => [
@@ -196,5 +197,38 @@ class BillController extends Controller
             'message' => 'Tagihan berhasil dihapus',
             'status' => 'success',
         ]);
+    }
+
+    public function xenditCallback(Request $request)
+    {
+        $headers = $request->header('x-callback-token');
+
+
+        if (env('XENDIT_CALLBACK_TOKEN') == $headers) {
+            $getId = Invoice::where('xendit_id', $request->id)->first();
+
+            if ($request->status == "PAID" || $request->status == "SETTLED") {
+                $updateInvoice = Invoice::where('xendit_id', $request->id)->first();
+                $fieldInvoice = [
+                    'status' => $request->status,
+                ];
+                $updateInvoice->update($fieldInvoice);
+
+                return response()->json([
+                    'statusCode' => 200,
+                    'message'    => "Success"
+                ], 200);
+            } else {
+                return response()->json([
+                    'statusCode' => 400,
+                    'message'    => "This endpoint only accept PAID or SETTLED status"
+                ], 400);
+            }
+        } else {
+            return response()->json([
+                'statusCode' => 400,
+                'message'    => "Callback verification token is invalid or your request doesn't come from Xendit"
+            ], 400);
+        }
     }
 }

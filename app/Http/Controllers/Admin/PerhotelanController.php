@@ -17,7 +17,7 @@ class PerhotelanController extends Controller
     {
         $students = Student::where('study_program_id', 1)
             ->where('grade_id', 1)
-            ->with('user.invoice', 'studyProgram', 'grade')
+            ->with('user')
             ->get();
         return view('pages.dashboard.study-programs.akomodasi-perhotelan.x.index', compact('students'));
     }
@@ -26,7 +26,7 @@ class PerhotelanController extends Controller
     {
         $students = Student::where('study_program_id', 1)
             ->where('grade_id', 2)
-            ->with('user.invoice', 'studyProgram', 'grade')
+            ->with('user')
             ->get();
         return view('pages.dashboard.study-programs.akomodasi-perhotelan.xi.index', compact('students'));
     }
@@ -35,7 +35,7 @@ class PerhotelanController extends Controller
     {
         $students = Student::where('study_program_id', 1)
             ->where('grade_id', 3)
-            ->with('user.invoice', 'studyProgram', 'grade')
+            ->with('user')
             ->get();
         return view('pages.dashboard.study-programs.akomodasi-perhotelan.xii.index', compact('students'));
     }

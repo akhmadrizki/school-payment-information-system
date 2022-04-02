@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'XII Multimedia')
+@section('title', 'Tunggakan')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('stisla/modules/datatables/datatables.min.css') }}">
@@ -11,18 +11,23 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>Kelas XII Multimedia</h1>
-
-  <div class="section-header-breadcrumb">
-    <a href="{{ url()->previous() }}" class="btn btn-sm btn-icon icon-left btn-primary">
-      <i class="fas fa-arrow-left"></i> Kembali
-    </a>
-  </div>
+  <h1>List Tunggakan</h1>
 </div>
 
 <div class="section-body">
   <div class="row">
     <div class="col-12">
+      @if (session('message'))
+      <div class="alert alert-{{ session('status') }} alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{ session('message') }}
+        </div>
+      </div>
+      @endif
+
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
@@ -30,22 +35,34 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>NIS</th>
-                  <th>Name</th>
-                  <th>Action</th>
+                  <th>Bulan</th>
+                  <th>Tahun</th>
+                  <th>Total Tunggakan</th>
+                  <th></th>
                 </tr>
               </thead>
 
               <tbody>
-                @foreach ($students as $student)
+                @foreach ($bills as $bill)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $student->nis }}</td>
-                  <td>{{ $student->user->name }}</td>
+                  <td>{{ $bill->month }}</td>
+                  <td>{{ $bill->year }}</td>
+
+                  @php
+                  $getTotal = $bill->invoices->sum('total');
+                  @endphp
+                  <td>Rp.{{ number_format($getTotal, 0, ',', '.') }}</td>
+
                   <td>
-                    <a href="#" class="btn btn-sm btn-icon icon-left btn-warning">
-                      <i class="fas fa-eye"></i> Detail
-                    </a>
+                    @php
+                    $getStatus = $bill->invoices;
+                    $countData = $getStatus->count();
+                    @endphp
+                    <a href="{{ route('tunggakan.show', $bill->id) }}"
+                      class="btn btn-sm btn-icon icon-left btn-primary {{ $countData != 0 ? 'none' :  'disabled'}}"><i
+                        class=" fas fa-eye"></i>
+                      Detail</a>
                   </td>
                 </tr>
                 @endforeach

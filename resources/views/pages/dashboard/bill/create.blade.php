@@ -16,7 +16,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <form action="{{ route('bill.store') }}" method="POST">
+          <form id="send" action="{{ route('bill.store') }}" method="POST">
             @csrf
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -67,7 +67,7 @@
             </div>
 
             <div class="text-right">
-              <button type="submit" class="btn btn-primary mr-2">Save</button>
+              <button type="submit" id="button" class="btn btn-primary mr-2">Save</button>
               <a href="{{ url()->previous() }}" type="button" class="btn">Cancel</a>
             </div>
           </form>
@@ -77,4 +77,15 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+  $(document).ready(function(){
+  $('#send').submit(function(){
+    document.getElementById('button').innerHTML = 'Saving...';
+    document.getElementById('button').disabled = true;
+  });
+  });
+</script>
 @endsection

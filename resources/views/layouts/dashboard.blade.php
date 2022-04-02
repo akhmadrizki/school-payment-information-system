@@ -74,8 +74,8 @@
               </a>
             </li>
 
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'tunggakan.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('tunggakan.index') }}">
                 <i class="fas fa-inbox"></i> <span>Tunggakan</span>
               </a>
             </li>
