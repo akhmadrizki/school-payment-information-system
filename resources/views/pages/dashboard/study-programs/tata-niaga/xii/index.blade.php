@@ -43,7 +43,8 @@
                   <td>{{ $student->nis }}</td>
                   <td>{{ $student->user->name }}</td>
                   <td>
-                    <a href="#" class="btn btn-sm btn-icon icon-left btn-warning">
+                    <a href="{{ route('admin.study-program.detail', $student->id) }}"
+                      class="btn btn-sm btn-icon icon-left btn-warning">
                       <i class="fas fa-eye"></i> Detail
                     </a>
                   </td>

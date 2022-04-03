@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DataSiswaController;
 use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\MultimediaController;
 use App\Http\Controllers\Admin\PerhotelanController;
+use App\Http\Controllers\Admin\StudyProgramController;
 use App\Http\Controllers\Admin\TataBogaController;
 use App\Http\Controllers\Admin\TataNiagaController;
 use App\Http\Controllers\Auth\LoginController;
@@ -42,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Route Debt
         Route::resource('/tunggakan', DebtController::class)->only(['index', 'show']);
+
+        // Route Detail SPP Siswa
+        Route::get('/laporan-spp-siswa/{id}', [StudyProgramController::class, 'detail'])->name('admin.study-program.detail');
 
         // Akomodasi Perhotelan Routes
         Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');

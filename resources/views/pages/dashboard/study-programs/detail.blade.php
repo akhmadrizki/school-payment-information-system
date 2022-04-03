@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'XI Tata Niaga')
+@section('title', $student->user->name. '-' .$student->grade->name)
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('stisla/modules/datatables/datatables.min.css') }}">
@@ -11,7 +11,7 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>Kelas XI Tata Niaga</h1>
+  <h1>{{ $student->user->name }} - {{ $student->grade->name }}</h1>
 
   <div class="section-header-breadcrumb">
     <a href="{{ url()->previous() }}" class="btn btn-sm btn-icon icon-left btn-primary">
@@ -30,23 +30,21 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>NIS</th>
-                  <th>Name</th>
-                  <th>Action</th>
+                  <th>Bulan</th>
+                  <th>Jumlah</th>
+                  <th>Status</th>
                 </tr>
               </thead>
 
               <tbody>
-                @foreach ($students as $student)
+                @foreach ($invoice as $student)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $student->nis }}</td>
-                  <td>{{ $student->user->name }}</td>
+                  <td>{{ $student->bill->month }}</td>
+                  <td>Rp.{{ number_format($student->total, 0, ',', '.') }}</td>
                   <td>
-                    <a href="{{ route('admin.study-program.detail', $student->id) }}"
-                      class="btn btn-sm btn-icon icon-left btn-warning">
-                      <i class="fas fa-eye"></i> Detail
-                    </a>
+                    <span class="badge badge-{{ $student->status == 'PENDING' ? 'warning' : 'seccess' }}">{{
+                      $student->status }}</span>
                   </td>
                 </tr>
                 @endforeach
