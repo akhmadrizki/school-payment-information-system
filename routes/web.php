@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\DataSiswaController;
 use App\Http\Controllers\Admin\DebtController;
+use App\Http\Controllers\Admin\IncomeController;
 use App\Http\Controllers\Admin\MultimediaController;
 use App\Http\Controllers\Admin\PerhotelanController;
 use App\Http\Controllers\Admin\StudyProgramController;
@@ -43,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Route Debt
         Route::resource('/tunggakan', DebtController::class)->only(['index', 'show']);
+
+        // Route Income
+        Route::get('/pendapatan', [IncomeController::class, 'index'])->name('admin.income.index');
 
         // Route Detail SPP Siswa
         Route::get('/laporan-spp-siswa/{id}', [StudyProgramController::class, 'detail'])->name('admin.study-program.detail');

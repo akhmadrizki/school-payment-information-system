@@ -80,6 +80,12 @@
               </a>
             </li>
 
+            <li class="{{ Request::route()->getName() == 'admin.income.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.income.index') }}">
+                <i class="fas fa-cash-register"></i> <span>Pemasukkan</span>
+              </a>
+            </li>
+
             <li class="menu-header">Siswa</li>
             <li class="{{ Request::route()->getName() == 'admin.perhotelan' ? 'active' : null }}">
               <a class="nav-link" href="{{ route('admin.perhotelan') }}">
