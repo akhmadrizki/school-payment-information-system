@@ -11,7 +11,7 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>List Tunggakan Bulan {{ $bills->month }} - {{ $bills->year }}</h1>
+  <h1>List Tunggakan Bulan <span class="text-capitalize">{{ $bills->month }}</span> - {{ $bills->year }}</h1>
 </div>
 
 <div class="section-body">
@@ -38,6 +38,7 @@
                   <th>NIS</th>
                   <th>Nama</th>
                   <th>Jurusan</th>
+                  <th>Tunggakan</th>
                   <th></th>
                 </tr>
               </thead>
@@ -48,8 +49,10 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $invoice->user->students->nis }}</td>
                   <td>{{ $invoice->user->name }}</td>
-                  <td>{{ $invoice->user->students->grade->name }} - {{ $invoice->user->students->studyProgram->name }}
+                  <td>
+                    {{ $invoice->user->students->grade->name }} - {{ $invoice->user->students->studyProgram->name }}
                   </td>
+                  <td>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-icon icon-left btn-warning">
                       <i class="fas fa-paper-plane"></i> Kirim pengingat

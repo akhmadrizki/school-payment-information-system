@@ -20,6 +20,7 @@ class IncomeController extends Controller
 
         $invoices = Invoice::whereMonth('created_at', $formatMonth)
             ->whereYear('created_at', $year)
+            ->where('status', '!=', 'PENDING')
             ->with('user.students.studyProgram', 'bill.grade')
             ->get();
 
