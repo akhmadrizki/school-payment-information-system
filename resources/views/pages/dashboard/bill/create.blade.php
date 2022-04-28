@@ -67,7 +67,8 @@
             </div>
 
             <div class="text-right">
-              <button type="submit" id="button" class="btn btn-primary mr-2">Save</button>
+              <button type="submit" id="button" class="btn btn-primary mr-2"
+                onclick="return confirm('Apakah Yakin Data Yang Anda Inputkan Sudah Benar ?')">Save</button>
               <a href="{{ url()->previous() }}" type="button" class="btn">Cancel</a>
             </div>
           </form>

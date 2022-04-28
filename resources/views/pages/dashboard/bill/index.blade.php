@@ -58,10 +58,6 @@
                   <td>{{ $bill->description }}</td>
                   <td>Rp.{{ number_format($bill->total, 0, ',', '.') }}</td>
                   <td>
-                    <a href="{{ route('bill.edit', $bill->id) }}" class="btn btn-sm btn-icon icon-left btn-primary"><i
-                        class="fas fa-edit"></i>
-                      Edit</a>
-
                     <button class="btn btn-sm btn-icon icon-left btn-danger" title="delete" data-toggle="modal"
                       data-target="#modal-{{ $bill->id }}">
                       <i class="fas fa-trash-alt"></i> Hapus

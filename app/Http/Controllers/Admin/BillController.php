@@ -193,6 +193,12 @@ class BillController extends Controller
     public function destroy($id)
     {
         $bill = Bill::findOrFail($id);
+        $getInvoice = Invoice::where('bill_id', $bill->id)->get();
+        // Delete multiple invoice
+        foreach ($getInvoice as $invoice) {
+            $invoice->delete();
+        }
+
         $bill->delete();
         return redirect()->route('bill.index')->with([
             'message' => 'Tagihan berhasil dihapus',
