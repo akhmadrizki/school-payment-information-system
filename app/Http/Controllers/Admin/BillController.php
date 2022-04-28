@@ -210,6 +210,9 @@ class BillController extends Controller
     {
         $headers = $request->header('x-callback-token');
 
+        // Twilio
+        $twilioSID = env('TWILIO_SID');
+        $twilioToken = env('TWILIO_TOKEN');
 
         if (env('XENDIT_CALLBACK_TOKEN') == $headers) {
             $getId = Invoice::where('xendit_id', $request->id)->first();
@@ -220,6 +223,18 @@ class BillController extends Controller
                     'status' => $request->status,
                 ];
                 $updateInvoice->update($fieldInvoice);
+
+                $getMonth = Bill::where('id', $updateInvoice->bill_id)->first();
+                $message = "Tagihan SPP bulan" . $getMonth->month . " telah dibayar";
+
+                $twilio = new Client($twilioSID, $twilioToken);
+                $twilio->messages->create(
+                    'whatsapp:+6281238483464',
+                    [
+                        'from' => 'whatsapp:+14155238886',
+                        'body' => $message,
+                    ]
+                );
 
                 return response()->json([
                     'statusCode' => 200,
