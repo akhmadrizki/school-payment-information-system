@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BillController;
+use App\Http\Controllers\Admin\DataAdminController;
 use App\Http\Controllers\Admin\DataSiswaController;
 use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\IncomeController;
@@ -77,6 +78,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Siswa Routes
         Route::resource('/siswa', DataSiswaController::class);
+
+        // Data Admin Routes
+        Route::resource('/admin', DataAdminController::class);
     });
 });
 

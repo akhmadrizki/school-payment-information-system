@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'List Siswa')
+@section('title', 'List Admin')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('stisla/modules/datatables/datatables.min.css') }}">
@@ -11,7 +11,7 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>List Siswa</h1>
+  <h1>List Admin</h1>
 </div>
 
 <div class="section-body">
@@ -30,37 +30,38 @@
 
       <div class="card">
         <div class="card-header">
-          <a href="{{ route('siswa.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i>
-            Tambah Data Siswa Baru</a>
+          <a href="{{ route('admin.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i>
+            Tambah Data Admin</a>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-striped" id="table-1">
               <thead>
                 <tr>
-                  <th>NIS</th>
-                  <th>Name</th>
-                  <th>Jurusan</th>
-                  <th>Kelas</th>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Alamat</th>
+                  <th>Kontak</th>
                   <th></th>
                 </tr>
               </thead>
 
               <tbody>
-                @foreach ($students as $student)
+                @foreach ($admin as $adm)
                 <tr>
-                  <td>{{ $student->nis }}</td>
-                  <td>{{ $student->user->name }}</td>
-                  <td>{{ $student->studyProgram->name }}</td>
-                  <td>{{ $student->grade->name }}</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $adm->user->name }}</td>
+                  <td>{{ $adm->user->email }}</td>
+                  <td>{{ $adm->address }}</td>
+                  <td><a href="wa.me/{{ $adm->contact }}" target="_blank">{{ $adm->contact }}</a></td>
                   <td>
-                    <a href="{{ route('siswa.edit', $student->id) }}"
-                      class="btn btn-sm btn-icon icon-left btn-primary"><i class="fas fa-edit"></i>
+                    <a href="{{ route('admin.edit', $adm->id) }}" class="btn btn-sm btn-icon icon-left btn-primary"><i
+                        class="fas fa-edit"></i>
                       Edit</a>
 
                     <button class="btn btn-sm btn-icon icon-left btn-danger" title="delete" data-toggle="modal"
-                      data-target="#modal-{{ $student->id }}"
-                      style="display :{{ auth()->user()->role_id == 2 ? 'none' : ' '}}">
+                      data-target="#modal-{{ $adm->id }}">
                       <i class="fas fa-trash-alt"></i> Hapus
                     </button>
                   </td>
@@ -78,22 +79,22 @@
 @endsection
 
 @section('modals')
-@foreach ($students as $student)
-<div class="modal fade" id="modal-{{ $student->id }}" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+@foreach ($admin as $adm)
+<div class="modal fade" id="modal-{{ $adm->id }}" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modal-label">Hapus Data Siswa</h5>
+        <h5 class="modal-title" id="modal-label">Hapus Data Admin</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Yakin mau hapus data {{ $student->user->name }}?
+        Yakin mau hapus data {{ $adm->user->name }}?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-        <form action="{{ route('siswa.destroy', $student->id) }}" method="POST">
+        <form action="{{ route('admin.destroy', $adm->id) }}" method="POST">
           @method('DELETE')
           @csrf
           <button type="submit" class="btn btn-danger">Delete</button>

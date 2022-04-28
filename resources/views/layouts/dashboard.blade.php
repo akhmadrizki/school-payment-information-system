@@ -109,14 +109,15 @@
             </li>
 
             <li class="menu-header">Data</li>
-            <li class="{{ Request::route()->getName() == 'siswa.index' ? 'active' : null }}">
-              <a class="nav-link" href="{{ route('siswa.index') }}">
-                <i class="fas fa-user"></i> <span>List Siswa</span>
+            <li class="{{ Request::route()->getName() == 'admin.index' ? 'active' : null }}"
+              style="display :{{ auth()->user()->role_id == 2 ? 'none' : ' '}}">
+              <a class="nav-link" href="{{ route('admin.index') }}">
+                <i class="fas fa-user"></i> <span>Data Admin</span>
               </a>
             </li>
-            <li class="{{ Request::route()->getName() == 'siswa.create' ? 'active' : null }}">
-              <a class="nav-link" href="{{ route('siswa.create') }}">
-                <i class="fas fa-user-plus"></i> <span>Tambah Data Siswa</span>
+            <li class="{{ Request::route()->getName() == 'siswa.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('siswa.index') }}">
+                <i class="fas fa-user"></i> <span>Data Siswa</span>
               </a>
             </li>
 

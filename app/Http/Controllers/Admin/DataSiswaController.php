@@ -139,6 +139,12 @@ class DataSiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $getUser = User::findOrFail($student->user_id);
+        $getUser->delete();
+        return redirect()->route('siswa.index')->with([
+            'message' => 'Data siswa berhasil dihapus',
+            'status'  => 'success',
+        ]);
     }
 }

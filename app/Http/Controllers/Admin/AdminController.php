@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Student;
 use App\Models\StudyProgram;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,6 +26,8 @@ class AdminController extends Controller
 
         $studyPrograms = StudyProgram::all();
 
-        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms'));
+        $getAdmin = User::where('role_id', '2')->get();
+
+        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms', 'getAdmin'));
     }
 }

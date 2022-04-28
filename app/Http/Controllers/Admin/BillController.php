@@ -95,6 +95,7 @@ class BillController extends Controller
                 'payer_email'       => $data->user->email,
                 'description'       => $bill->description,
                 'amount'            => $bill->total,
+                'locale'            => 'Id',
                 'customer'          => [
                     'email' => $data->user->email,
                     'mobile_number' => $data->user->students->whatsapp,
