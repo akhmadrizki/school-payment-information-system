@@ -7,6 +7,7 @@ use App\Models\Bill;
 use App\Models\Grade;
 use App\Models\Invoice;
 use App\Models\Student;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -90,10 +91,11 @@ class BillController extends Controller
 
         // Store data to xendit
         foreach ($getInvoice as $data) {
+            $message = 'Hallo ' . $data->user->name . ', '  . ' Segera lakukan pembayaran SPP bulan ' . $bill->month . ', ' . ' tahun ' . $bill->year . ' Terimakasih.';
             $xendit = \Xendit\Invoice::create([
                 'external_id'       => $data->invoice_code,
                 'payer_email'       => $data->user->email,
-                'description'       => $bill->description,
+                'description'       => $message,
                 'amount'            => $bill->total,
                 'locale'            => 'Id',
                 'customer'          => [
@@ -225,8 +227,10 @@ class BillController extends Controller
                 $updateInvoice->update($fieldInvoice);
 
                 $getMonth = Bill::where('id', $updateInvoice->bill_id)->first();
-                $message = "Tagihan SPP bulan" . $getMonth->month . " telah dibayar";
+                $getUser = User::where('id', $updateInvoice->user_id)->first();
+                $message = "Hallo, " . " Tagihan SPP bulan " . $getMonth->month . " Tahun " . $getMonth->year . " atas nama " . $getUser->name . " telah dibayarkan, Terimakasih.";
 
+                // Send whatsaap message to parent
                 $twilio = new Client($twilioSID, $twilioToken);
                 $twilio->messages->create(
                     'whatsapp:+6281238483464',

@@ -47,14 +47,6 @@ Login
               </div>
 
               <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" {{
-                    old('remember') ? 'checked' : '' }}>
-                  <label class="custom-control-label" for="remember-me">Remember Me</label>
-                </div>
-              </div>
-
-              <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                   Login
                 </button>

@@ -29,6 +29,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::redirect('/', '/login-admin');
+
 Route::get('/login-admin', [LoginController::class, 'index'])->name('admin');
 
 Route::prefix('/')->group(function () {
