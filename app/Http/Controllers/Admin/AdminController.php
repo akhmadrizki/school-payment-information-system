@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\StudyProgram;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -28,6 +29,11 @@ class AdminController extends Controller
 
         $getAdmin = User::where('role_id', '2')->get();
 
-        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms', 'getAdmin'));
+        $getUserActive = Auth::user()->id;
+        $arrears = Invoice::where('status', 'PENDING')
+            ->where('user_id', $getUserActive)
+            ->get();
+
+        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms', 'getAdmin', 'arrears'));
     }
 }

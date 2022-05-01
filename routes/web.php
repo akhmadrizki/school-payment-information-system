@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\StudyProgramController;
 use App\Http\Controllers\Admin\TataBogaController;
 use App\Http\Controllers\Admin\TataNiagaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,6 +84,10 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Admin Routes
         Route::resource('/admin', DataAdminController::class);
+
+        // Student Routes
+        Route::get('/info-pembayaran', [StudentController::class, 'paymentInfo'])->name('student.payment-info');
+        Route::get('/detail-pembayaran/{id}', [StudentController::class, 'paymentDetail'])->name('student.payment-detail');
     });
 });
 

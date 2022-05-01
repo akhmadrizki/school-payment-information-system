@@ -124,9 +124,15 @@
             <!-- For Role Student -->
             @elseif(auth()->user()->role_id == 3)
             <li class="menu-header">Data</li>
+            <li class="{{ Request::route()->getName() == 'student.payment-info' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('student.payment-info') }}">
+                <i class="fas fa-receipt"></i> <span>Informasi Pembayaran</span>
+              </a>
+            </li>
+
             <li>
               <a class="nav-link" href="#">
-                <i class="fas fa-user-plus"></i> <span>Aku Siswa</span>
+                <i class="fas fa-id-card"></i> <span>Profil Saya</span>
               </a>
             </li>
 

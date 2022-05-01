@@ -9,6 +9,8 @@
 
 <div class="section-body">
   <div class="row">
+
+    @if (auth()->user()->role_id != 3)
     <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">
 
@@ -62,6 +64,7 @@
         </div>
       </div>
     </div>
+    @endif
 
     @if (auth()->user()->role_id == 1)
     <div class="col-lg-4 col-md-4 col-sm-12">
@@ -81,6 +84,83 @@
       </div>
     </div>
     @endif
+
+    @if (auth()->user()->role_id == 3)
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-primary">
+          <i class="fas fa-hand-holding-usd"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Tunggakan Pembayaran</h4>
+          </div>
+          <div class="card-body">
+            @php
+            $total = $arrears->sum('total');
+            @endphp
+            Rp.{{ number_format($total, 0, ',', '.') }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-success">
+          <i class="fas fa-receipt"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Informasi Pembayaran</h4>
+          </div>
+          <div class="card-body">
+            <a href="#" class="btn btn-outline-success btn-sm btn-icon icon-right">Lihat Informasi Pembayaran SPP <i
+                class="fas fa-long-arrow-alt-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-warning">
+          <i class="fas fa-id-badge"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Data Pribadi</h4>
+          </div>
+          <div class="card-body">
+            <a href="#" class="btn btn-outline-warning btn-sm btn-icon icon-right">Lihat Profile Saya <i
+                class="fas fa-long-arrow-alt-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-info">
+          <i class="fas fa-comment-dots"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Contact Admin</h4>
+          </div>
+          <div class="card-body">
+            <a href="#" class="btn btn-outline-info btn-sm btn-icon icon-right">Hubungi Admin <i
+                class="fas fa-long-arrow-alt-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
+
   </div>
 </div>
 @endsection
