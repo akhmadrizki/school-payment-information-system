@@ -41,7 +41,8 @@
                 <label for="year">Tahun</label>
                 <input type="number" min="0" class="form-control" name="year" id="year" required>
               </div>
-              <div class="form-group col-md-6">
+
+              <div class="form-group col-md-4">
                 <label for="grade_id">Kelas</label>
                 <select name="grade_id" id="grade_id" class="form-control">
                   <option value="none" selected disabled>- Pilih Kelas -</option>
@@ -50,7 +51,16 @@
                   @endforeach
                 </select>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
+                <label for="scholarship_id">Beasiswa</label>
+                <select name="scholarship_id" id="scholarship_id" class="form-control">
+                  <option value="none" selected disabled>- Pilih Jenis Beasiswa -</option>
+                  @foreach ($scholarships as $scholarship)
+                  <option value="{{ $scholarship->id }}" class="text-capitalize">{{ $scholarship->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group col-md-4">
                 <label for="total">Total</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -59,6 +69,7 @@
                   <input name="total" id="total" type="number" min="0" class="form-control" required>
                 </div>
               </div>
+
               <div class="form-group col-md-12">
                 <label>Deskripsi</label>
                 <textarea class="form-control" style="height: 150px" name="description"

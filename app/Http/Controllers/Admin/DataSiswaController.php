@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Models\Grade;
+use App\Models\Scholarship;
 use App\Models\Student;
 use App\Models\StudyProgram;
 use App\Models\User;
@@ -21,7 +22,7 @@ class DataSiswaController extends Controller
      */
     public function index()
     {
-        $students = Student::with('user', 'studyProgram', 'grade')->get();
+        $students = Student::with('user', 'studyProgram', 'grade', 'scholarship')->get();
         return view('pages.dashboard.students.index', compact('students'));
     }
 
@@ -34,7 +35,8 @@ class DataSiswaController extends Controller
     {
         $grades        = Grade::all();
         $studyPrograms = StudyProgram::all();
-        return view('pages.dashboard.students.create', compact('grades', 'studyPrograms'));
+        $scholarships  = Scholarship::all();
+        return view('pages.dashboard.students.create', compact('grades', 'studyPrograms', 'scholarships'));
     }
 
     /**
@@ -67,6 +69,7 @@ class DataSiswaController extends Controller
                 'user_id'          => $user->id,
                 'study_program_id' => $request->study_program,
                 'grade_id'         => $request->grade,
+                'scholarship_id'   => $request->scholarship,
             ];
             Student::create($field);
 
@@ -101,7 +104,8 @@ class DataSiswaController extends Controller
         $student = Student::with('user', 'studyProgram', 'grade')->findOrFail($id);
         $studyPrograms = StudyProgram::all();
         $grades = Grade::all();
-        return view('pages.dashboard.students.edit', compact('student', 'studyPrograms', 'grades'));
+        $scholarships = Scholarship::all();
+        return view('pages.dashboard.students.edit', compact('student', 'studyPrograms', 'grades', 'scholarships'));
     }
 
     /**
@@ -118,6 +122,7 @@ class DataSiswaController extends Controller
             'nis'              => $request->nis,
             'study_program_id' => $request->study_program,
             'grade_id'         => $request->grade,
+            'scholarship_id'   => $request->scholarship,
         ];
         $student->update($fields);
 

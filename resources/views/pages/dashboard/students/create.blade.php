@@ -34,7 +34,7 @@
                 <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}"
                   placeholder="Nama">
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="study_program">Jurusan</label>
                 <select name="study_program" id="study_program" class="form-control">
                   <option value="none" selected disabled>- Pilih Jurusan -</option>
@@ -43,7 +43,7 @@
                   @endforeach
                 </select>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="grade">Kelas</label>
                 <select name="grade" id="grade" class="form-control">
                   <option value="none" selected disabled>- Pilih Kelas -</option>
@@ -52,11 +52,20 @@
                   @endforeach
                 </select>
               </div>
+              <div class="form-group col-md-4">
+                <label for="scholarship">Beasiswa</label>
+                <select name="scholarship" id="scholarship" class="form-control">
+                  <option value="none" selected disabled>- Pilih Jenis Beasiswa -</option>
+                  @foreach ($scholarships as $scholarship)
+                  <option value="{{ $scholarship->id }}" class="text-capitalize">{{ $scholarship->name }}</option>
+                  @endforeach
+                </select>
+              </div>
             </div>
 
             <div class="text-right">
               <button type="submit" class="btn btn-primary mr-2">Save</button>
-              <a href="#" type="button" class="btn">Cancel</a>
+              <a href="{{ route('siswa.index') }}" type="button" class="btn">Cancel</a>
             </div>
           </form>
 

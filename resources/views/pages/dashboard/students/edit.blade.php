@@ -35,7 +35,7 @@
                 <input type="text" class="form-control" name="name" id="name" value="{{ $student->user->name }}"
                   placeholder="Nama">
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="study_program">Jurusan</label>
                 <select name="study_program" id="study_program" class="form-control">
                   <option value="none" selected disabled>- Pilih Jurusan -</option>
@@ -47,12 +47,23 @@
                   @endforeach
                 </select>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="grade">Kelas</label>
                 <select name="grade" id="grade" class="form-control">
                   <option value="none" selected disabled>- Pilih Kelas -</option>
                   @foreach ($grades as $grade)
                   <option value="{{ $grade->id }}" @if($student->grade_id == $grade->id) selected @endif>{{ $grade->name
+                    }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="scholarship">Beasiswa</label>
+                <select name="scholarship" id="scholarship" class="form-control">
+                  <option value="none" selected disabled>- Pilih Jenis Beasiswa -</option>
+                  @foreach ($scholarships as $scholarship)
+                  <option value="{{ $scholarship->id }}" @if($student->scholarship_id == $scholarship->id) selected
+                    @endif>{{ $scholarship->name
                     }}</option>
                   @endforeach
                 </select>

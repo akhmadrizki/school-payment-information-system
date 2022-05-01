@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->unsignedInteger('study_program_id');
             $table->unsignedInteger('grade_id');
+            $table->unsignedInteger('scholarship_id');
             $table->timestamps();
         });
     }

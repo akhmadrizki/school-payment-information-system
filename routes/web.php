@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Route Detail SPP Siswa
         Route::get('/laporan-spp-siswa/{id}', [StudyProgramController::class, 'detail'])->name('admin.study-program.detail');
+        Route::get('/detail-laporan-spp-siswa/{id}', [StudyProgramController::class, 'detailPayment'])->name('admin.study-program.detail-payment');
 
         // Akomodasi Perhotelan Routes
         Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');

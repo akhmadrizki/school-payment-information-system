@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\Grade;
 use App\Models\Invoice;
+use App\Models\Scholarship;
 use App\Models\Student;
 use App\Models\User;
 use DateTime;
@@ -39,7 +40,8 @@ class BillController extends Controller
         date_default_timezone_set('Asia/Makassar');
 
         $grades = Grade::all();
-        return view('pages.dashboard.bill.create', compact('grades'));
+        $scholarships = Scholarship::all();
+        return view('pages.dashboard.bill.create', compact('grades', 'scholarships'));
     }
 
     /**
@@ -61,6 +63,7 @@ class BillController extends Controller
 
         // Get all student with grade choosen
         $students = Student::where('grade_id', $bill->grade_id)
+            ->where('scholarship_id', $request->scholarship_id)
             ->with('user')
             ->get();
 

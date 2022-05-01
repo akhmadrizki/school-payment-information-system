@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', $student->user->name. '-' .$student->grade->name)
+@section('title', ' ' . $getUser->name)
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('stisla/modules/datatables/datatables.min.css') }}">
@@ -11,7 +11,9 @@
 
 @section('main-content')
 <div class="section-header">
-  <h1>{{ $student->user->name }} - {{ $student->grade->name }}</h1>
+  <h1>Detail Pembayaran SPP - <span class="text-capitalize">{{ $invoice->bill->month }}</span> {{
+    $invoice->bill->year
+    }} | <span class="text-capitalize">{{ $getUser->name }}</span></h1>
 
   <div class="section-header-breadcrumb">
     <a href="{{ url()->previous() }}" class="btn btn-sm btn-icon icon-left btn-primary">
@@ -24,41 +26,49 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-striped" id="table-1">
+            <table class="table table-striped table-md">
               <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Bulan</th>
-                  <th>Jumlah</th>
-                  <th>Status</th>
-                  <th></th>
+                  <th>#</th>
+                  <th>Keterangan</th>
+                  <th>Total</th>
                 </tr>
               </thead>
-
               <tbody>
-                @foreach ($invoice as $student)
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $student->bill->month }}</td>
-                  <td>Rp.{{ number_format($student->total, 0, ',', '.') }}</td>
-                  <td>
-                    @php
-                    $status = $student->status == 'PENDING' ? 'BELUM LUNAS' : 'LUNAS';
-                    @endphp
-                    <span class="badge badge-{{ $student->status == 'PENDING' ? 'warning' : 'success' }}">{{
-                      $status }}</span>
-                  </td>
-                  <td>
-                    <a href="{{ route('admin.study-program.detail-payment', $student->id) }}"
-                      class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Lihat
-                      Detail</a>
-                  </td>
+                  <td>1</td>
+                  <td>{{ $invoice->bill->description }}</td>
+                  <td>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</td>
                 </tr>
-                @endforeach
-              </tbody>
 
+                <tr>
+                  <th colspan="2">Grand Total</th>
+                  <th>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</th>
+                </tr>
+
+                @if ($invoice->status != 'PENDING')
+                <tr>
+                  <th colspan="2">Metode Pembayaran</th>
+                  <th style="list-style-type: none">
+                    <li>{{ $getInvoice['payment_method'] }}</li>
+                    <li>{{ $getInvoice['payment_channel'] }}</li>
+                  </th>
+                </tr>
+                @endif
+
+                <tr>
+                  <th colspan="2"></th>
+                  <th>
+                    @php
+                    $status = $invoice->status == 'PENDING' ? 'BELUM LUNAS' : 'LUNAS';
+                    @endphp
+                    <span class="badge badge-{{ $invoice->status == 'PENDING' ? 'warning' : 'success' }}">{{
+                      $status }}</span>
+                  </th>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
