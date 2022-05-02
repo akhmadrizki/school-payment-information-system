@@ -17,7 +17,7 @@ class MultimediaController extends Controller
     {
         $students = Student::where('study_program_id', 2)
             ->where('grade_id', 1)
-            ->with('user', 'grade')
+            ->with('user', 'grade', 'scholarship')
             ->get();
         return view('pages.dashboard.study-programs.multimedia.x.index', compact('students'));
     }
@@ -26,7 +26,7 @@ class MultimediaController extends Controller
     {
         $students = Student::where('study_program_id', 2)
             ->where('grade_id', 2)
-            ->with('user', 'grade')
+            ->with('user', 'grade', 'scholarship')
             ->get();
         return view('pages.dashboard.study-programs.multimedia.xi.index', compact('students'));
     }
@@ -35,7 +35,7 @@ class MultimediaController extends Controller
     {
         $students = Student::where('study_program_id', 2)
             ->where('grade_id', 3)
-            ->with('user', 'grade')
+            ->with('user', 'grade', 'scholarship')
             ->get();
         return view('pages.dashboard.study-programs.multimedia.xii.index', compact('students'));
     }

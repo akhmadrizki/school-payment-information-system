@@ -32,6 +32,7 @@
                   <th>No</th>
                   <th>NIS</th>
                   <th>Name</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -42,6 +43,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $student->nis }}</td>
                   <td>{{ $student->user->name }}</td>
+                  <td><span class="badge badge-warning">{{ $student->scholarship->name }}</span></td>
                   <td>
                     <a href="{{ route('admin.study-program.detail', $student->id) }}"
                       class="btn btn-sm btn-icon icon-left btn-warning">

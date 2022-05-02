@@ -70,7 +70,7 @@
 
 
 @if (isset($month))
-<div class="section-body">
+<div class="section-body text-capitalize">
   <div class="row">
     <div class="col-12">
 
@@ -92,6 +92,7 @@
                   <th>Kelas</th>
                   <th>Jurusan</th>
                   <th>Total</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
               </thead>
@@ -103,10 +104,11 @@
                   <td>{{ $bill->bill->grade->name }}</td>
                   <td>{{ $bill->user->students->studyProgram->name }}</td>
                   <td>Rp.{{ number_format($bill->total, 0, ',', '.') }}</td>
+                  <td><span class="badge badge-warning">{{ $bill->user->students->scholarship->name }}</span></td>
                 </tr>
                 @endforeach
                 <tr>
-                  <th colspan="4">Grand Total</th>
+                  <th colspan="5">Grand Total</th>
                   @php
                   $total = $invoices->sum('total');
                   @endphp

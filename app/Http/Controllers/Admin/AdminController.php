@@ -34,6 +34,10 @@ class AdminController extends Controller
             ->where('user_id', $getUserActive)
             ->get();
 
-        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms', 'getAdmin', 'arrears'));
+        $regular   = Student::where('scholarship_id', '1')->get();
+        $bidikmisi = Student::where('scholarship_id', '2')->get();
+        $prestasi  = Student::where('scholarship_id', '3')->get();
+
+        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms', 'getAdmin', 'arrears', 'regular', 'bidikmisi', 'prestasi'));
     }
 }

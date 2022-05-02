@@ -64,6 +64,58 @@
         </div>
       </div>
     </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-danger">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Total Siswa Reguler</h4>
+          </div>
+          <div class="card-body">
+            {{ $regular->count() }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-danger">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Total Beasiswa Bidikmisi</h4>
+          </div>
+          <div class="card-body">
+            {{ $bidikmisi->count() }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+
+        <div class="card-icon shadow-primary bg-danger">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Total Beasiswa Berprestasi</h4>
+          </div>
+          <div class="card-body">
+            {{ $prestasi->count() }}
+          </div>
+        </div>
+      </div>
+    </div>
+
     @endif
 
     @if (auth()->user()->role_id == 1)

@@ -21,7 +21,7 @@ class IncomeController extends Controller
         $invoices = Invoice::whereMonth('created_at', $formatMonth)
             ->whereYear('created_at', $year)
             ->where('status', '!=', 'PENDING')
-            ->with('user.students.studyProgram', 'bill.grade')
+            ->with('user.students.studyProgram', 'bill.grade', 'user.students.scholarship')
             ->get();
 
         return view('pages.dashboard.income.index', compact('month', 'year', 'invoices'));

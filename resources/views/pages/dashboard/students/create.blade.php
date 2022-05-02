@@ -19,7 +19,7 @@
           <form action="{{ route('siswa.store') }}" method="POST">
             @csrf
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="nis">NIS</label>
                 <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" id="nis"
                   value="{{ old('nis') }}" placeholder="NIS">
@@ -29,10 +29,15 @@
                 </span>
                 @enderror
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="name">Nama</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}"
                   placeholder="Nama">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}"
+                  placeholder="Alamat Email">
               </div>
               <div class="form-group col-md-4">
                 <label for="study_program">Jurusan</label>
@@ -60,6 +65,17 @@
                   <option value="{{ $scholarship->id }}" class="text-capitalize">{{ $scholarship->name }}</option>
                   @endforeach
                 </select>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="whatsapp">No Whatsapp</label>
+                <input type="tel" class="form-control" name="whatsapp" id="whatsapp" value="{{ old('whatsapp') }}"
+                  placeholder="Nomor Whatsapp">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="whatsapp_parent">No Whatsapp Orang Tua/Wali</label>
+                <input type="tel" class="form-control" name="whatsapp_parent" id="whatsapp_parent"
+                  value="{{ old('whatsapp_parent') }}" placeholder="Nomor Whatsapp Orang Tua/Wali">
               </div>
             </div>
 

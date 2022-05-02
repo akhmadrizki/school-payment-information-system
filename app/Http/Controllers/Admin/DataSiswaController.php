@@ -55,7 +55,7 @@ class DataSiswaController extends Controller
                 'name'     => $request->name,
                 'username' => $validated['nis'],
                 'role_id'  => 3,
-                'email'    => null,
+                'email'    => $request->email,
                 'password' => Hash::make($validated['nis']),
             ];
             $user = User::create($storeUser);
@@ -63,8 +63,8 @@ class DataSiswaController extends Controller
             // Store to Student table
             $field = [
                 'nis'              => $validated['nis'],
-                'whatsapp'         => null,
-                'whatsapp_parent'  => null,
+                'whatsapp'         => $request->whatsapp,
+                'whatsapp_parent'  => $request->whatsapp_parent,
                 'is_active'        => true,
                 'user_id'          => $user->id,
                 'study_program_id' => $request->study_program,
@@ -120,6 +120,8 @@ class DataSiswaController extends Controller
         $student = Student::findOrFail($id);
         $fields = [
             'nis'              => $request->nis,
+            'whatsapp'         => $request->whatsapp,
+            'whatsapp_parent'  => $request->whatsapp_parent,
             'study_program_id' => $request->study_program,
             'grade_id'         => $request->grade,
             'scholarship_id'   => $request->scholarship,
@@ -127,8 +129,11 @@ class DataSiswaController extends Controller
         $student->update($fields);
 
         $user = User::findOrFail($student->user_id);
-        $user->name = $request->name;
-        $user->save();
+        $fiendUser = [
+            'name'     => $request->name,
+            'email'    => $request->email,
+        ];
+        $user->update($fiendUser);
 
         return redirect()->route('siswa.index')->with([
             'message' => 'Data siswa berhasil diubah',

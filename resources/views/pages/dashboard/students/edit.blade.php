@@ -20,7 +20,7 @@
             @csrf
             @method('PUT')
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="nis">NIS</label>
                 <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" id="nis"
                   value="{{ $student->nis }}" readonly>
@@ -30,10 +30,15 @@
                 </span>
                 @enderror
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="name">Nama</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ $student->user->name }}"
                   placeholder="Nama">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ $student->user->email }}"
+                  placeholder="Alamat Email">
               </div>
               <div class="form-group col-md-4">
                 <label for="study_program">Jurusan</label>
@@ -67,6 +72,17 @@
                     }}</option>
                   @endforeach
                 </select>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="whatsapp">No Whatsapp</label>
+                <input type="tel" class="form-control" name="whatsapp" id="whatsapp" value="{{ $student->whatsapp }}"
+                  placeholder="Nomor Whatsapp">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="whatsapp_parent">No Whatsapp Orang Tua/Wali</label>
+                <input type="tel" class="form-control" name="whatsapp_parent" id="whatsapp_parent"
+                  value="{{ $student->whatsapp_parent }}" placeholder="Nomor Whatsapp Orang Tua/Wali">
               </div>
             </div>
 

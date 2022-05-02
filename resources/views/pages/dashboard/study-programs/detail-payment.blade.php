@@ -48,6 +48,12 @@
                   <th>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</th>
                 </tr>
 
+                <tr>
+                  <th colspan="2">Status Siswa</th>
+                  <td><span class="badge badge-info text-capitalize">{{
+                      $invoice->user->students->scholarship->name }}</span></td>
+                </tr>
+
                 @if ($invoice->status != 'PENDING')
                 <tr>
                   <th colspan="2">Metode Pembayaran</th>

@@ -35,8 +35,10 @@ class StudyProgramController extends Controller
         $getUser = User::where('id', $getUserId->user_id)->first();
 
         $invoice = Invoice::where('id', $id)
-            ->with('bill', 'user')
+            ->with('bill', 'user.students.scholarship')
             ->first();
+
+        // return $invoice;
 
         $getInvoice = \Xendit\Invoice::retrieve($invoice->xendit_id);
 

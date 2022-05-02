@@ -41,7 +41,8 @@ class DebtController extends Controller
                 $query->where('status', 'PENDING');
             },
             'invoices.user.students.studyProgram',
-            'invoices.user.students.grade'
+            'invoices.user.students.grade',
+            'invoices.user.students.scholarship'
         ])
             ->findOrFail($id);
 

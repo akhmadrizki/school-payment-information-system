@@ -39,6 +39,7 @@
                   <th>Nama</th>
                   <th>Jurusan</th>
                   <th>Tunggakan</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
               </thead>
@@ -53,6 +54,7 @@
                     {{ $invoice->user->students->grade->name }} - {{ $invoice->user->students->studyProgram->name }}
                   </td>
                   <td>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</td>
+                  <td><span class="badge badge-warning">{{ $invoice->user->students->scholarship->name }}</span></td>
                   <td>
                     <a href="#" class="btn btn-sm btn-icon icon-left btn-warning">
                       <i class="fas fa-paper-plane"></i> Kirim pengingat
