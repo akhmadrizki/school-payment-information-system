@@ -26,7 +26,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::with('grade')->get();
+        $bills = Bill::with('grade', 'scholarship')->get();
         return view('pages.dashboard.bill.index', compact('bills'));
     }
 
@@ -53,11 +53,12 @@ class BillController extends Controller
     public function store(Request $request)
     {
         $field = [
-            'month'       => $request->month,
-            'year'        => $request->year,
-            'total'       => $request->total,
-            'description' => $request->description,
-            'grade_id'    => $request->grade_id,
+            'month'          => $request->month,
+            'year'           => $request->year,
+            'total'          => $request->total,
+            'description'    => $request->description,
+            'grade_id'       => $request->grade_id,
+            'scholarship_id' => $request->scholarship_id,
         ];
         $bill = Bill::create($field);
 

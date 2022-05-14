@@ -14,6 +14,18 @@
 <div class="section-body">
   <div class="row">
     <div class="col-12">
+
+      @if (session('message'))
+      <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{ session('message') }}
+        </div>
+      </div>
+      @endif
+
       <div class="card">
         <div class="card-body">
           <form action="{{ route('siswa.update', $student->id) }}" method="POST">
@@ -32,8 +44,13 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="name">Nama</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ $student->user->name }}"
-                  placeholder="Nama">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
+                  value="{{ $student->user->name }}" placeholder="Nama">
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group col-md-4">
                 <label for="email">Email</label>
@@ -76,13 +93,24 @@
 
               <div class="form-group col-md-6">
                 <label for="whatsapp">No Whatsapp</label>
-                <input type="tel" class="form-control" name="whatsapp" id="whatsapp" value="{{ $student->whatsapp }}"
-                  placeholder="Nomor Whatsapp">
+                <input type="tel" class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp"
+                  id="whatsapp" value="{{ $student->whatsapp }}" placeholder="Nomor Whatsapp">
+                @error('whatsapp')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group col-md-6">
                 <label for="whatsapp_parent">No Whatsapp Orang Tua/Wali</label>
-                <input type="tel" class="form-control" name="whatsapp_parent" id="whatsapp_parent"
-                  value="{{ $student->whatsapp_parent }}" placeholder="Nomor Whatsapp Orang Tua/Wali">
+                <input type="tel" class="form-control @error('whatsapp_parent') is-invalid @enderror"
+                  name="whatsapp_parent" id="whatsapp_parent" value="{{ $student->whatsapp_parent }}"
+                  placeholder="Nomor Whatsapp Orang Tua/Wali">
+                @error('whatsapp_parent')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
             </div>
 

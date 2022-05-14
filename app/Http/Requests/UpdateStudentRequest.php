@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudentRequest extends FormRequest
+class UpdateStudentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,10 @@ class StoreStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'nis' => 'required|regex:/^([0-9\s\(\)]*)$/|min:4|max:4|unique:students',
-            'email' => 'required|email|unique:users',
-            'whatsapp' => 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15|unique:students',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'whatsapp' => 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15',
             'whatsapp_parent' => 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15',
-            'study_program' => 'required|exists:study_programs,id',
-            'grade' => 'required|exists:grades,id',
-            'scholarship' => 'required|exists:scholarships,id',
         ];
     }
 
@@ -42,8 +39,7 @@ class StoreStudentRequest extends FormRequest
     public function messages()
     {
         return [
-            'nis.unique' => 'NIS sudah terdaftar',
-            'nis.regex' => 'NIS harus berupa angka',
+            'name.regex' => 'Nama tidak sesuai format',
             'email.email' => 'Email tidak valid',
             'whatsapp.regex' => 'Nomor tidak sesuai',
             'whatsapp_parent.regex' => 'Nomor tidak sesuai',

@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Student;
+use App\Models\Admin;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class StudentSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,16 +16,11 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        Student::insert([
+        Admin::insert([
             [
-                'nis' => '6381',
-                'whatsapp' => '6281999015508',
-                'whatsapp_parent' => '6281936060096',
-                'is_active' => true,
-                'user_id' => 3,
-                'study_program_id' => 2,
-                'scholarship_id' => 1,
-                'grade_id' => 3,
+                'address' => 'Jl. Raya Cisitu',
+                'contact' => '6281999015502',
+                'user_id' => 2,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ],

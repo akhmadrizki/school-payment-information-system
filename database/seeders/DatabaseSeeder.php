@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             StudyProgramSeeder::class,
             GradeSeeder::class,
             StudentSeeder::class,
+            AdminSeeder::class,
             ScholarshipSeeder::class,
         ]);
     }

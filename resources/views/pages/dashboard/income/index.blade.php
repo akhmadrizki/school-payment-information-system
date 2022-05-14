@@ -93,7 +93,6 @@
                   <th>Jurusan</th>
                   <th>Total</th>
                   <th>Status</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>

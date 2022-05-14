@@ -12,6 +12,12 @@
 @section('main-content')
 <div class="section-header">
   <h1>List Tunggakan Bulan <span class="text-capitalize">{{ $bills->month }}</span> - {{ $bills->year }}</h1>
+
+  <div class="section-header-breadcrumb">
+    <a href="{{ route('tunggakan.index') }}" class="btn btn-sm btn-icon icon-left btn-primary">
+      <i class="fas fa-arrow-left"></i> Kembali
+    </a>
+  </div>
 </div>
 
 <div class="section-body">
@@ -56,7 +62,8 @@
                   <td>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</td>
                   <td><span class="badge badge-warning">{{ $invoice->user->students->scholarship->name }}</span></td>
                   <td>
-                    <a href="#" class="btn btn-sm btn-icon icon-left btn-warning">
+                    <a href="{{ route('debt.sendReminder', $invoice->id) }}"
+                      class="btn btn-sm btn-icon icon-left btn-warning">
                       <i class="fas fa-paper-plane"></i> Kirim pengingat
                     </a>
                   </td>

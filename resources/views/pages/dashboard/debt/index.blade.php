@@ -36,7 +36,9 @@
                 <tr>
                   <th>No</th>
                   <th>Bulan</th>
+                  <th>Kelas</th>
                   <th>Tahun</th>
+                  <th>Status</th>
                   <th>Total Tunggakan</th>
                   <th></th>
                 </tr>
@@ -47,7 +49,9 @@
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $bill->month }}</td>
+                  <td>{{ $bill->grade->name }}</td>
                   <td>{{ $bill->year }}</td>
+                  <td><span class="badge badge-warning">{{ $bill->scholarship->name }}</span></td>
 
                   @php
                   $getTotal = $bill->invoices->sum('total');

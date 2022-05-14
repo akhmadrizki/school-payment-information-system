@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Grade;
 use App\Models\Scholarship;
 use App\Models\Student;
@@ -48,14 +49,14 @@ class DataSiswaController extends Controller
     public function store(StoreStudentRequest $request)
     {
         try {
-            $validated = $request->safe()->only(['nis']);
+            $validated = $request->safe()->only(['nis', 'email', 'whatsapp', 'whatsapp_parent']);
 
             // Store to User table
             $storeUser = [
                 'name'     => $request->name,
                 'username' => $validated['nis'],
                 'role_id'  => 3,
-                'email'    => $request->email,
+                'email'    => $validated['email'],
                 'password' => Hash::make($validated['nis']),
             ];
             $user = User::create($storeUser);
@@ -63,8 +64,8 @@ class DataSiswaController extends Controller
             // Store to Student table
             $field = [
                 'nis'              => $validated['nis'],
-                'whatsapp'         => $request->whatsapp,
-                'whatsapp_parent'  => $request->whatsapp_parent,
+                'whatsapp'         => $validated['whatsapp'],
+                'whatsapp_parent'  => $validated['whatsapp_parent'],
                 'is_active'        => true,
                 'user_id'          => $user->id,
                 'study_program_id' => $request->study_program,
@@ -115,30 +116,49 @@ class DataSiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateStudentRequest $request, $id)
     {
-        $student = Student::findOrFail($id);
-        $fields = [
-            'nis'              => $request->nis,
-            'whatsapp'         => $request->whatsapp,
-            'whatsapp_parent'  => $request->whatsapp_parent,
-            'study_program_id' => $request->study_program,
-            'grade_id'         => $request->grade,
-            'scholarship_id'   => $request->scholarship,
-        ];
-        $student->update($fields);
+        try {
+            $validated = $request->safe()->only(['name', 'email', 'whatsapp', 'whatsapp_parent']);
 
-        $user = User::findOrFail($student->user_id);
-        $fiendUser = [
-            'name'     => $request->name,
-            'email'    => $request->email,
-        ];
-        $user->update($fiendUser);
+            $student = Student::findOrFail($id);
 
-        return redirect()->route('siswa.index')->with([
-            'message' => 'Data siswa berhasil diubah',
-            'status' => 'success',
-        ]);
+            if ($validated['whatsapp'] == $student->whatsapp) {
+                $wa = $request->whatsapp;
+            } else {
+                $this->validate(
+                    $request,
+                    ['whatsapp' => 'required|unique:students,whatsapp'],
+                    ['whatsapp.unique' => 'Nomor WhatsApp sudah terdaftar']
+                );
+                $wa = $request->whatsapp;
+            }
+
+            // Update to Student table
+            $fields = [
+                'whatsapp'         => $wa,
+                'whatsapp_parent'  => $validated['whatsapp_parent'],
+                'study_program_id' => $request->study_program,
+                'grade_id'         => $request->grade,
+                'scholarship_id'   => $request->scholarship,
+            ];
+            $student->update($fields);
+
+            // Update to User table
+            $user = User::findOrFail($student->user_id);
+            $fiendUser = [
+                'name'     => $validated['name'],
+                'email'    => $validated['email'],
+            ];
+            $user->update($fiendUser);
+
+            return redirect()->route('siswa.index')->with([
+                'message' => 'Data siswa berhasil diubah',
+                'status' => 'success',
+            ]);
+        } catch (Exception $error) {
+            return redirect()->route('siswa.edit', $student->id)->with('message', $error->getMessage());
+        }
     }
 
     /**

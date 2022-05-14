@@ -8,11 +8,13 @@ use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\IncomeController;
 use App\Http\Controllers\Admin\MultimediaController;
 use App\Http\Controllers\Admin\PerhotelanController;
+use App\Http\Controllers\Admin\StaffProfileController;
 use App\Http\Controllers\Admin\StudyProgramController;
 use App\Http\Controllers\Admin\TataBogaController;
 use App\Http\Controllers\Admin\TataNiagaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +32,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::redirect('/', '/login-admin');
+// Route::redirect('/', '/login-admin');
 
 Route::get('/login-admin', [LoginController::class, 'index'])->name('admin');
 
@@ -48,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Route Debt
         Route::resource('/tunggakan', DebtController::class)->only(['index', 'show']);
+        Route::get('/kirim-pengingat/{id}', [DebtController::class, 'sendReminder'])->name('debt.sendReminder');
 
         // Route Income
         Route::get('/pendapatan', [IncomeController::class, 'index'])->name('admin.income.index');
@@ -55,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
         // Route Detail SPP Siswa
         Route::get('/laporan-spp-siswa/{id}', [StudyProgramController::class, 'detail'])->name('admin.study-program.detail');
         Route::get('/detail-laporan-spp-siswa/{id}', [StudyProgramController::class, 'detailPayment'])->name('admin.study-program.detail-payment');
+        Route::get('/kirim-pengingat-pembayaran/{id}', [StudyProgramController::class, 'sendReminder'])->name('admin.study-program.sendReminder');
 
         // Akomodasi Perhotelan Routes
         Route::get('/akomodasi-perhotelan', [PerhotelanController::class, 'index'])->name('admin.perhotelan');
@@ -82,9 +86,19 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Siswa Routes
         Route::resource('/siswa', DataSiswaController::class);
+        Route::get('/profile', [StudentProfileController::class, 'index'])->name('student.profile');
+        Route::get('/profile/{id}/edit', [StudentProfileController::class, 'edit'])->name('student.profile.edit');
+        Route::put('/profile/{id}', [StudentProfileController::class, 'update'])->name('student.profile.update');
+        Route::get('/profile/{id}/password', [StudentProfileController::class, 'password'])->name('student.profile.password');
+        Route::put('/profile/{id}/password', [StudentProfileController::class, 'updatePassword'])->name('student.profile.password.update');
 
         // Data Admin Routes
         Route::resource('/admin', DataAdminController::class);
+        Route::get('/profile-staff', [StaffProfileController::class, 'index'])->name('staff.profile');
+        Route::get('/profile-staff/{id}/edit', [StaffProfileController::class, 'edit'])->name('staff.profile.edit');
+        Route::put('/profile-staff/{id}', [StaffProfileController::class, 'update'])->name('staff.profile.update');
+        Route::get('/profile-staff/{id}/password', [StaffProfileController::class, 'password'])->name('staff.profile.password');
+        Route::put('/profile-staff/{id}/password', [StaffProfileController::class, 'updatePassword'])->name('staff.profile.password.update');
 
         // Student Routes
         Route::get('/info-pembayaran', [StudentController::class, 'paymentInfo'])->name('student.payment-info');

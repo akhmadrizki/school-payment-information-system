@@ -18,4 +18,9 @@ class Scholarship extends Model
     {
         return $this->hasOne(Student::class);
     }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
 }

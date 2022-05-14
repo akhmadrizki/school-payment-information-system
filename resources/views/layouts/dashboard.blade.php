@@ -38,9 +38,14 @@
               <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a href="#" class="dropdown-item has-icon">
+
+              @if (auth()->user()->role_id != 3)
+              <a href="{{ route('staff.profile') }}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Edit Profile
               </a>
+              @else
+
+              @endif
               <a href="{{ route('logout') }}" id="logout" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
@@ -130,8 +135,8 @@
               </a>
             </li>
 
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'student.profile' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('student.profile') }}">
                 <i class="fas fa-id-card"></i> <span>Profil Saya</span>
               </a>
             </li>

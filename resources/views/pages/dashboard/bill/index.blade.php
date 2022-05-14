@@ -42,6 +42,7 @@
                   <th>Bulan</th>
                   <th>Tahun</th>
                   <th>Kelas</th>
+                  <th>Status</th>
                   <th>Deskripsi</th>
                   <th>Jumlah</th>
                   <th></th>
@@ -55,6 +56,7 @@
                   <td>{{ $bill->month }}</td>
                   <td>{{ $bill->year }}</td>
                   <td>{{ $bill->grade->name }}</td>
+                  <td><span class="badge badge-warning">{{ $bill->scholarship->name }}</span></td>
                   <td>{{ $bill->description }}</td>
                   <td>Rp.{{ number_format($bill->total, 0, ',', '.') }}</td>
                   <td>

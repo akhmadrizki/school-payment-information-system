@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->char('nis', 4)->unique();
-            $table->char('whatsapp', 15)->nullable();
-            $table->char('whatsapp_parent', 15)->nullable();
+            $table->char('whatsapp', 15);
+            $table->char('whatsapp_parent', 15);
             $table->boolean('is_active')->default(true);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->unsignedInteger('study_program_id');

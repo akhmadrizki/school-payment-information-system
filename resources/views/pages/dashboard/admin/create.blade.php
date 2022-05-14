@@ -26,13 +26,23 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" id="username" value="{{ old('username') }}"
-                  placeholder="Username">
+                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"
+                  id="username" value="{{ old('username') }}" placeholder="Username">
+                @error('username')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group col-md-4">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}"
-                  placeholder="Email Admin">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email"
+                  value="{{ old('email') }}" placeholder="Email Admin">
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group col-md-6">
                 <label for="address">Alamat</label>
@@ -41,8 +51,13 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="contact">Kontak</label>
-                <input type="tel" class="form-control" name="contact" id="contact" value="{{ old('contact') }}"
-                  placeholder="No WA/Tlpn">
+                <input type="tel" class="form-control @error('contact') is-invalid @enderror" name="contact"
+                  id="contact" value="{{ old('contact') }}" placeholder="No WA/Tlpn">
+                @error('contact')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
             </div>
 

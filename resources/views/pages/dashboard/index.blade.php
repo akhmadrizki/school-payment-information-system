@@ -10,6 +10,19 @@
 <div class="section-body">
   <div class="row">
 
+    <div class="col-12">
+      @if (session('message'))
+      <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{ session('message') }}
+        </div>
+      </div>
+      @endif
+    </div>
+
     @if (auth()->user()->role_id != 3)
     <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">

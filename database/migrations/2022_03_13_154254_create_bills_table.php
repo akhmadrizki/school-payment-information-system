@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('total');
             $table->string('description');
             $table->foreignId('grade_id')->constrained('grades');
+            $table->unsignedInteger('scholarship_id');
             $table->timestamps();
         });
     }

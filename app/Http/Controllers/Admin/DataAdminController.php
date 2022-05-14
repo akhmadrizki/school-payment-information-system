@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Admin;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -37,28 +40,34 @@ class DataAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
-        $field = [
-            'name'     => $request->name,
-            'username' => $request->username,
-            'email'    => $request->email,
-            'role_id'  => 2,
-            'password' => Hash::make('admin123#'),
-        ];
-        $addAdmin = User::create($field);
+        try {
+            $validated = $request->safe()->only(['username', 'email', 'contact']);
 
-        $fieldAdmin = [
-            'address' => $request->address,
-            'contact' => $request->contact,
-            'user_id' => $addAdmin->id,
-        ];
-        Admin::create($fieldAdmin);
+            $field = [
+                'name'     => $request->name,
+                'username' => $validated['username'],
+                'email'    => $validated['email'],
+                'role_id'  => 2,
+                'password' => Hash::make('admin123#'),
+            ];
+            $addAdmin = User::create($field);
 
-        return redirect()->route('admin.index')->with([
-            'message' => 'Data admin berhasil ditambahkan',
-            'status'  => 'success',
-        ]);
+            $fieldAdmin = [
+                'address' => $request->address,
+                'contact' => $validated['contact'],
+                'user_id' => $addAdmin->id,
+            ];
+            Admin::create($fieldAdmin);
+
+            return redirect()->route('admin.index')->with([
+                'message' => 'Data admin berhasil ditambahkan',
+                'status'  => 'success',
+            ]);
+        } catch (Exception $error) {
+            return redirect()->route('admin.create')->with('message', $error->getMessage());
+        }
     }
 
     /**
@@ -91,27 +100,46 @@ class DataAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAdminRequest $request, $id)
     {
-        $admin = Admin::findOrFail($id);
-        $field = [
-            'address' => $request->address,
-            'contact' => $request->contact,
-        ];
-        $admin->update($field);
+        try {
+            $validated = $request->safe()->only(['username', 'email', 'contact']);
 
-        $user = User::findOrFail($admin->user_id);
-        $fieldUser = [
-            'name'     => $request->name,
-            'username' => $request->username,
-            'email'    => $request->email,
-        ];
-        $user->update($fieldUser);
+            $admin = Admin::findOrFail($id);
 
-        return redirect()->route('admin.index')->with([
-            'message' => 'Data admin berhasil diubah',
-            'status'  => 'success',
-        ]);
+            $field = [
+                'address' => $request->address,
+                'contact' => $validated['contact'],
+            ];
+            $admin->update($field);
+
+            $user = User::findOrFail($admin->user_id);
+
+            if ($validated['username'] != $user->username) {
+                $this->validate(
+                    $request,
+                    ['username' => 'required|string|min:4|max:20|unique:users'],
+                    ['username.unique' => 'Username sudah digunakan']
+                );
+                $username = $request->username;
+            } else {
+                $username = $validated['username'];
+            }
+
+            $fieldUser = [
+                'name'     => $request->name,
+                'username' => $username,
+                'email'    => $validated['email'],
+            ];
+            $user->update($fieldUser);
+
+            return redirect()->route('admin.index')->with([
+                'message' => 'Data admin berhasil diubah',
+                'status'  => 'success',
+            ]);
+        } catch (Exception $error) {
+            return redirect()->route('admin.edit', $admin->id)->with('message', $error->getMessage());
+        }
     }
 
     /**

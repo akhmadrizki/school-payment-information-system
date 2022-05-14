@@ -14,6 +14,18 @@
 <div class="section-body">
   <div class="row">
     <div class="col-12">
+
+      @if (session('message'))
+      <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{ session('message') }}
+        </div>
+      </div>
+      @endif
+
       <div class="card">
         <div class="card-body">
 
@@ -28,8 +40,13 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" id="username"
-                  value="{{ $admin->user->username }}" placeholder="Username">
+                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"
+                  id="username" value="{{ $admin->user->username }}" placeholder="Username">
+                @error('username')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group col-md-4">
                 <label for="email">Email</label>
@@ -43,8 +60,13 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="contact">Kontak</label>
-                <input type="tel" class="form-control" name="contact" id="contact" value="{{ $admin->contact }}"
-                  placeholder="No WA/Tlpn">
+                <input type="tel" class="form-control @error('contact') is-invalid @enderror" name="contact"
+                  id="contact" value="{{ $admin->contact }}" placeholder="No WA/Tlpn">
+                @error('contact')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
             </div>
 

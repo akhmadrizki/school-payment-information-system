@@ -62,6 +62,16 @@
                     <li>{{ $getInvoice['payment_channel'] }}</li>
                   </th>
                 </tr>
+                @elseif($invoice->status == 'PENDING')
+                <tr>
+                  <th colspan="2"></th>
+                  <th style="list-style-type: none">
+                    <a href="{{ route('admin.study-program.sendReminder', $invoice->id) }}"
+                      class="btn btn-sm btn-icon icon-left btn-danger">
+                      <i class="fas fa-paper-plane"></i> Kirim pengingat
+                    </a>
+                  </th>
+                </tr>
                 @endif
 
                 <tr>

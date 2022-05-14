@@ -16,6 +16,7 @@ class Bill extends Model
         'total',
         'description',
         'grade_id',
+        'scholarship_id',
     ];
 
     public function grade()
@@ -26,5 +27,10 @@ class Bill extends Model
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'bill_id');
+    }
+
+    public function scholarship()
+    {
+        return $this->belongsTo(Scholarship::class, 'scholarship_id');
     }
 }
