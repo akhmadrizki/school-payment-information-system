@@ -32,7 +32,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::redirect('/', '/login-admin');
+Route::redirect('/', '/login-admin');
 
 Route::get('/login-admin', [LoginController::class, 'index'])->name('admin');
 
@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Route Income
         Route::get('/pendapatan', [IncomeController::class, 'index'])->name('admin.income.index');
+        Route::get('/income-export', [IncomeController::class, 'export'])->name('admin.income.export');
 
         // Route Detail SPP Siswa
         Route::get('/laporan-spp-siswa/{id}', [StudyProgramController::class, 'detail'])->name('admin.study-program.detail');

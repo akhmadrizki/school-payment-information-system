@@ -78,7 +78,9 @@
         <div class="card-header">
           <h4 class="text-capitalize">{{ $month }} - {{ $year }}</h4>
           <div class="card-header-form">
-            <a href="#" class="btn btn-icon icon-left btn-primary"><i class="fas fa-download"></i> Download Data</a>
+            <a href="{{ route('admin.income.export', $request->query()) }}"
+              class="btn btn-icon icon-left btn-primary {{ count($invoices) != 0 ? 'none' : 'disabled'}}"><i
+                class="fas fa-download"></i> Download Data</a>
           </div>
         </div>
 

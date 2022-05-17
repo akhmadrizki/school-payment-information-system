@@ -150,6 +150,7 @@
     </div>
     @endif
 
+    {{-- For Role Students --}}
     @if (auth()->user()->role_id == 3)
     <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-statistic-2">
@@ -182,7 +183,8 @@
             <h4>Informasi Pembayaran</h4>
           </div>
           <div class="card-body">
-            <a href="#" class="btn btn-outline-success btn-sm btn-icon icon-right">Lihat Informasi Pembayaran SPP <i
+            <a href="{{ route('student.payment-info') }}"
+              class="btn btn-outline-success btn-sm btn-icon icon-right">Lihat Informasi Pembayaran SPP <i
                 class="fas fa-long-arrow-alt-right"></i></a>
           </div>
         </div>
@@ -200,8 +202,8 @@
             <h4>Data Pribadi</h4>
           </div>
           <div class="card-body">
-            <a href="#" class="btn btn-outline-warning btn-sm btn-icon icon-right">Lihat Profile Saya <i
-                class="fas fa-long-arrow-alt-right"></i></a>
+            <a href="{{ route('student.profile') }}" class="btn btn-outline-warning btn-sm btn-icon icon-right">Lihat
+              Profile Saya <i class="fas fa-long-arrow-alt-right"></i></a>
           </div>
         </div>
       </div>
@@ -218,7 +220,8 @@
             <h4>Contact Admin</h4>
           </div>
           <div class="card-body">
-            <a href="#" class="btn btn-outline-info btn-sm btn-icon icon-right">Hubungi Admin <i
+            <a href="https://api.whatsapp.com/send?phone=62895394548780&text=Hallo%20Admin%20Saya%20ingin%20diskusi%20terkait%20Pembayaran%20SPP"
+              target="_blank" class="btn btn-outline-info btn-sm btn-icon icon-right">Hubungi Admin <i
                 class="fas fa-long-arrow-alt-right"></i></a>
           </div>
         </div>
