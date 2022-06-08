@@ -69,7 +69,7 @@ class DebtController extends Controller
 
         $getUser = User::where('id', $bills->invoices->first()->user_id)->first();
         $getUrlInv = $bills->invoices->first()->invoice_url;
-        $message = "Hallo " . " Siswa atas nama " . $getUser->name . ", diingatkan untuk segera melakukan pembayaran SPP pada bulan " . $bills->month . " " . $bills->year . "\n\nLink pembayaran: \n" . $getUrlInv . "\n\nMohon untuk tidak membalas pesan ini." . "\nSekian dan terimakasih" . "\n\n- Bendahara SMK Nusa Dua";
+        $message = "Hallo, Orangtua / Wali dari " . " Siswa atas nama " . $getUser->name . ", diingatkan untuk segera melakukan pembayaran SPP pada bulan " . $bills->month . " " . $bills->year . "\n\nLink pembayaran: \n" . $getUrlInv . "\n\nMohon untuk tidak membalas pesan ini." . "\nSekian dan terimakasih" . "\n\n- Bendahara SMK Nusa Dua";
 
         // Twilio
         $twilioSID = env('TWILIO_SID');
