@@ -34,9 +34,18 @@
         <ul class="navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="avatar" src="{{ asset('stisla/img/avatar-1.png')}}" class="rounded-circle mr-1">
               <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
+
+              @if (auth()->user()->role_id != 3)
+              <a href="{{ route('staff.profile') }}" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Edit Profile
+              </a>
+              @else
+
+              @endif
               <a href="{{ route('logout') }}" id="logout" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
@@ -56,40 +65,85 @@
             <a href="#">SKND</a>
           </div>
           <ul class="sidebar-menu">
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.dashboard' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
               </a>
             </li>
 
+            <!-- For Roles Admin and Master -->
+            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+            <li class="{{ Request::route()->getName() == 'bill.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('bill.index') }}">
+                <i class="fas fa-bullhorn"></i> <span>Buat Tagihan</span>
+              </a>
+            </li>
+
+            <li class="{{ Request::route()->getName() == 'tunggakan.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('tunggakan.index') }}">
+                <i class="fas fa-inbox"></i> <span>Tunggakan</span>
+              </a>
+            </li>
+
+            <li class="{{ Request::route()->getName() == 'admin.income.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.income.index') }}">
+                <i class="fas fa-cash-register"></i> <span>Pemasukkan</span>
+              </a>
+            </li>
+
             <li class="menu-header">Siswa</li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.perhotelan' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.perhotelan') }}">
                 <i class="fas fa-hotel"></i> <span>Akomodasi Perhotelan</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.multimedia' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.multimedia') }}">
                 <i class="fas fa-desktop"></i> <span>Multimedia</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.tata-boga' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.tata-boga') }}">
                 <i class="fas fa-utensils"></i> <span>Tata Boga</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" href="#">
+            <li class="{{ Request::route()->getName() == 'admin.tata-niaga' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('admin.tata-niaga') }}">
                 <i class="fas fa-wallet"></i> <span>Tata Niaga</span>
               </a>
             </li>
 
             <li class="menu-header">Data</li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-user-plus"></i> <span>Tambah Data Siswa</span>
+            <li class="{{ Request::route()->getName() == 'admin.index' ? 'active' : null }}"
+              style="display :{{ auth()->user()->role_id == 2 ? 'none' : ' '}}">
+              <a class="nav-link" href="{{ route('admin.index') }}">
+                <i class="fas fa-user"></i> <span>Data Admin</span>
               </a>
             </li>
+            <li class="{{ Request::route()->getName() == 'siswa.index' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('siswa.index') }}">
+                <i class="fas fa-user"></i> <span>Data Siswa</span>
+              </a>
+            </li>
+
+            <!-- For Role Student -->
+            @elseif(auth()->user()->role_id == 3)
+            <li class="menu-header">Data</li>
+            <li class="{{ Request::route()->getName() == 'student.payment-info' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('student.payment-info') }}">
+                <i class="fas fa-receipt"></i> <span>Informasi Pembayaran</span>
+              </a>
+            </li>
+
+            <li class="{{ Request::route()->getName() == 'student.profile' ? 'active' : null }}">
+              <a class="nav-link" href="{{ route('student.profile') }}">
+                <i class="fas fa-id-card"></i> <span>Profil Saya</span>
+              </a>
+            </li>
+
+            @endif
+            <!-- End Conditional -->
+
           </ul>
         </aside>
       </div>

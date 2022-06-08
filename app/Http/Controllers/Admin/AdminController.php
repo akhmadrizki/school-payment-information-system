@@ -3,12 +3,41 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\Student;
+use App\Models\StudyProgram;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('pages.dashboard.index');
+        date_default_timezone_set('Asia/Makassar');
+        $month = date('m');
+        $year  = date('Y');
+
+        $getInvoice = Invoice::whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->where('status', '!=', 'PENDING')
+            ->get();
+
+        $getStudents = Student::all();
+
+        $studyPrograms = StudyProgram::all();
+
+        $getAdmin = User::where('role_id', '2')->get();
+
+        $getUserActive = Auth::user()->id;
+        $arrears = Invoice::where('status', 'PENDING')
+            ->where('user_id', $getUserActive)
+            ->get();
+
+        $regular   = Student::where('scholarship_id', '1')->get();
+        $bidikmisi = Student::where('scholarship_id', '2')->get();
+        $prestasi  = Student::where('scholarship_id', '3')->get();
+
+        return view('pages.dashboard.index', compact('getInvoice', 'getStudents', 'studyPrograms', 'getAdmin', 'arrears', 'regular', 'bidikmisi', 'prestasi'));
     }
 }

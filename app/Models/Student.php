@@ -14,9 +14,11 @@ class Student extends Model
         'nis',
         'whatsapp',
         'whatsapp_parent',
+        'is_active',
         'user_id',
         'study_program_id',
         'grade_id',
+        'scholarship_id',
     ];
 
     public function user()
@@ -32,5 +34,10 @@ class Student extends Model
     public function grade()
     {
         return $this->belongsTo(Grade::class, 'grade_id');
+    }
+
+    public function scholarship()
+    {
+        return $this->belongsTo(Scholarship::class, 'scholarship_id');
     }
 }
