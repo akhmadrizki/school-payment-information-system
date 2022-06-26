@@ -52,14 +52,14 @@
 
               <tbody>
                 @foreach ($bills->invoices as $invoice)
-                <tr>
+                <tr class="text-capitalize">
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $invoice->user->students->nis }}</td>
                   <td>{{ $invoice->user->name }}</td>
                   <td>
                     {{ $invoice->user->students->grade->name }} - {{ $invoice->user->students->studyProgram->name }}
                   </td>
-                  <td>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</td>
+                  <td>Rp{{ number_format($invoice->total, 0, ',', '.') }}</td>
                   <td><span class="badge badge-warning">{{ $invoice->user->students->scholarship->name }}</span></td>
                   <td>
                     <a href="{{ route('debt.sendReminder', $invoice->id) }}"

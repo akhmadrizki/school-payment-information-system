@@ -104,7 +104,7 @@
                   <td>{{ $bill->user->name }}</td>
                   <td>{{ $bill->bill->grade->name }}</td>
                   <td>{{ $bill->user->students->studyProgram->name }}</td>
-                  <td>Rp.{{ number_format($bill->total, 0, ',', '.') }}</td>
+                  <td>Rp{{ number_format($bill->total, 0, ',', '.') }}</td>
                   <td><span class="badge badge-warning">{{ $bill->user->students->scholarship->name }}</span></td>
                 </tr>
                 @endforeach
