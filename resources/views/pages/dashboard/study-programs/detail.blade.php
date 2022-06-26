@@ -39,10 +39,10 @@
 
               <tbody>
                 @foreach ($invoice as $student)
-                <tr>
+                <tr class="text-capitalize">
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $student->bill->month }}</td>
-                  <td>Rp.{{ number_format($student->total, 0, ',', '.') }}</td>
+                  <td>Rp{{ number_format($student->total, 0, ',', '.') }}</td>
                   <td>
                     @php
                     $status = $student->status == 'PENDING' ? 'BELUM LUNAS' : 'LUNAS';

@@ -51,14 +51,14 @@
 
               <tbody>
                 @foreach ($bills as $bill)
-                <tr>
+                <tr class="text-capitalize">
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $bill->month }}</td>
                   <td>{{ $bill->year }}</td>
                   <td>{{ $bill->grade->name }}</td>
                   <td><span class="badge badge-warning">{{ $bill->scholarship->name }}</span></td>
                   <td>{{ $bill->description }}</td>
-                  <td>Rp.{{ number_format($bill->total, 0, ',', '.') }}</td>
+                  <td>Rp{{ number_format($bill->total, 0, ',', '.') }}</td>
                   <td>
                     <button class="btn btn-sm btn-icon icon-left btn-danger" title="delete" data-toggle="modal"
                       data-target="#modal-{{ $bill->id }}">

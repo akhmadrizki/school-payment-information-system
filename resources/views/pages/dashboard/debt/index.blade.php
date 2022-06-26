@@ -46,7 +46,7 @@
 
               <tbody>
                 @foreach ($bills as $bill)
-                <tr>
+                <tr class="text-capitalize">
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $bill->month }}</td>
                   <td>{{ $bill->grade->name }}</td>
@@ -56,7 +56,7 @@
                   @php
                   $getTotal = $bill->invoices->sum('total');
                   @endphp
-                  <td>Rp.{{ number_format($getTotal, 0, ',', '.') }}</td>
+                  <td>Rp{{ number_format($getTotal, 0, ',', '.') }}</td>
 
                   <td>
                     @php

@@ -38,7 +38,7 @@
             @php
             $income = $getInvoice->sum('total');
             @endphp
-            Rp.{{ number_format($income, 0, ',', '.') }}
+            Rp{{ number_format($income, 0, ',', '.') }}
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@
             @php
             $total = $arrears->sum('total');
             @endphp
-            Rp.{{ number_format($total, 0, ',', '.') }}
+            Rp{{ number_format($total, 0, ',', '.') }}
           </div>
         </div>
       </div>

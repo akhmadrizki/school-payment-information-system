@@ -40,12 +40,12 @@
                 <tr>
                   <td>1</td>
                   <td>{{ $invoice->bill->description }}</td>
-                  <td>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</td>
+                  <td>Rp{{ number_format($invoice->total, 0, ',', '.') }}</td>
                 </tr>
 
                 <tr>
                   <th colspan="2">Grand Total</th>
-                  <th>Rp.{{ number_format($invoice->total, 0, ',', '.') }}</th>
+                  <th>Rp{{ number_format($invoice->total, 0, ',', '.') }}</th>
                 </tr>
 
                 <tr>
